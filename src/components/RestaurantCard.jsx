@@ -1,15 +1,16 @@
+import { IMG_URL } from "../utils/contants";
 const RestaurantCard = (props) => {
     const { resData } = props;
-    console.log(resData);
-    const { name, image, cuisine, rating } = resData.info;
+    // console.log(resData);
+    const { name, cloudinaryImageId, cuisines, avgRating } = resData.info;
   
     return (
       <div className="res-card">
-        <img className="res-logo" alt="res-logo" src={image.url} />
+        <img className="res-logo" alt="res-logo" src={IMG_URL+cloudinaryImageId} />
         <h3>{name}</h3>
-        <h4>{cuisine.map((c) => c.name).join(", ")}</h4>
-        <h4>{rating.aggregate_rating}</h4>
-        <h4>{resData.order.deliveryTime}</h4>
+        <h4>{cuisines.join(",")}</h4>
+        <h4>{avgRating}</h4>
+        <h4>{resData.info.sla.deliverTime} min</h4>
       </div>
     );
   };
