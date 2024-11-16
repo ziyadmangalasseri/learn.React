@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import Shimmer from "./shimmer";
 
 const Body = () => {
-  //Local State Variable - super powerful variable
+  // Local State Variable - super powerful variable
   const [ListOfRestaurants, setListOfRestaurant] = useState([]);
-  const [filteredREstaurant,setFilteredRestaurant] = useState([]);
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   console.log("body rendered");
 
@@ -20,15 +20,18 @@ const Body = () => {
     );
     const json = await data.json();
     console.log(json);
-    setListOfRestaurant(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurant(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+
+    const restaurants =
+    // Optional Chaining
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants || [];
+
+    setListOfRestaurant(restaurants);
+    setFilteredRestaurant(restaurants);
   };
+
   // Conditional Rendering
-  return ListOfRestaurants.length == 0 ? (
+  return !ListOfRestaurants || ListOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -46,8 +49,11 @@ const Body = () => {
               console.log(searchText);
               const filteredRestaurantCards = ListOfRestaurants.filter(
                 (res) => {
-                 return res.info.name.toLowerCase().includes(searchText.toLowerCase());
-                });
+                  return res.info.name
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase());
+                }
+              );
               setFilteredRestaurant(filteredRestaurantCards);
             }}
           >
@@ -56,12 +62,12 @@ const Body = () => {
         </div>
         <div className="filter">
           <button
-            className="filter-btn "
+            className="filter-btn"
             onClick={() => {
               const filteredList = ListOfRestaurants.filter(
                 (res) => res.info.avgRating >= 4.5
               );
-              setListOfRestaurant(filteredList);
+              setFilteredRestaurant(filteredList);
             }}
           >
             Top Rated Restaurants
@@ -70,7 +76,7 @@ const Body = () => {
       </div>
 
       <div className="res-container">
-        {filteredREstaurant.map((restaurant) => (
+        {filteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
         {/* <Shimmer /> */}
