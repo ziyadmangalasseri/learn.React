@@ -43,7 +43,7 @@ const Body = () => {
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
-          />
+          /> 
           <button
             onClick={() => {
               console.log(searchText);
@@ -71,7 +71,7 @@ const Body = () => {
             }}
           >
             Top Rated Restaurants
-          </button>
+          </button> 
         </div>
       </div>
 
