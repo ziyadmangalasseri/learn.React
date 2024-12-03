@@ -130,3 +130,10 @@
 .loaded .shimmer {
   background-color: transparent;
 }
+
+.user-card {
+  padding: 5px;
+  width: 200px;
+  cursor: pointer;
+  border: 1px solid black;
+}

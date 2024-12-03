@@ -2,6 +2,7 @@ import RestaurantCard from "../components/RestaurantCard";
 import resList from "../utils/swiggyData";
 import { useState, useEffect } from "react";
 import Shimmer from "./shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   // Local State Variable - super powerful variable
@@ -22,7 +23,7 @@ const Body = () => {
     console.log(json);
 
     const restaurants =
-    // Optional Chaining
+      // Optional Chaining
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || [];
 
@@ -43,7 +44,7 @@ const Body = () => {
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
-          /> 
+          />
           <button
             onClick={() => {
               console.log(searchText);
@@ -71,13 +72,15 @@ const Body = () => {
             }}
           >
             Top Rated Restaurants
-          </button> 
+          </button>
         </div>
       </div>
 
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link to={"/restaurantmenu/" + restaurant.info.id}>
+            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          </Link>
         ))}
         {/* <Shimmer /> */}
       </div>
