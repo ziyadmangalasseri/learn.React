@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy,Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { jsx } from "react/jsx-runtime";
 import Header from "./components/Header";
@@ -9,6 +9,14 @@ import { createBrowserRouter,RouterProvider, Outlet } from "react-router-dom";
 import { Error } from "./components/Error";
 import { RestaurantMenu } from "./components/RestaurantMenu";
 
+
+// Chunking 
+// Code Spliting
+// Dynamic Bundiling
+// lazy loading
+// on demand loading
+// dynamic import
+const Grocery = lazy(()=> import("./components/Grocery"))
 
 // Component Composition
 const AppLayout = () => {
@@ -34,10 +42,14 @@ const appRouter = createBrowserRouter([
         element:<About/>,
     
       },
-      {
+      { 
         path:"/contact",
         element:<Contact/>,
     
+      },
+      {
+        path:"/grocery",
+        element:<Suspense><Grocery/></Suspense>
       },
       {
         path:"/restaurantmenu/:resId",
