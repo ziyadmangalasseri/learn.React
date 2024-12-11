@@ -19,8 +19,8 @@ export const RestaurantMenu = () => {
       ?.itemCards || [];
 
   return (
-    <div className="menu">
-      <h1>{name}</h1>
+    <div className="menu text-center">
+      <h1 className="font-bold p-2 text-lg">{name}</h1>
       <h3>{cuisines?.join(", ")}</h3>
       <ul>
         {itemCards.map((item) => (

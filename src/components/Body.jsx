@@ -1,4 +1,6 @@
-import RestaurantCard from "../components/RestaurantCard";
+import RestaurantCard, {
+  withPromotedLabel,
+} from "../components/RestaurantCard";
 import resList from "../utils/swiggyData";
 import { useState, useEffect } from "react";
 import Shimmer from "./shimmer";
@@ -10,6 +12,7 @@ const Body = () => {
   const [ListOfRestaurants, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const PromotedRestaurantCard = withPromotedLabel(RestaurantCard);
   console.log("body rendered");
 
   useEffect(() => {
@@ -41,10 +44,11 @@ const Body = () => {
   return !ListOfRestaurants || ListOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="body-head">
-        <div className="search-div">
+    <div className="body flex-row justify-center px-[100px]">
+      <div className="body-head flex p-4">
+        <div className="search-div p-1">
           <input
+            className="border border-solid border-black"
             type="text"
             value={searchText}
             onChange={(e) => {
@@ -52,6 +56,7 @@ const Body = () => {
             }}
           />
           <button
+            className="px-4 py-1 bg-green-400 ml-2 rounded-lg"
             onClick={() => {
               console.log(searchText);
               const filteredRestaurantCards = ListOfRestaurants.filter(
@@ -67,9 +72,9 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="filter">
+        <div className="filter p-1">
           <button
-            className="filter-btn"
+            className="filter-btn px-4 bg-red-500 rounded-lg py-1"
             onClick={() => {
               const filteredList = ListOfRestaurants.filter(
                 (res) => res.info.avgRating >= 4.5
@@ -82,10 +87,16 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="res-container">
+      <div className="res-container flex flex-wrap p-4">
         {filteredRestaurant.map((restaurant) => (
           <Link to={"/restaurantmenu/" + restaurant.info.id}>
-            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+            <div className="p-1">
+              {restaurant.info.aggregatedDiscountInfoV3 ? (
+                <PromotedRestaurantCard resData={restaurant} />
+              ) : (
+                <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+              )}
+            </div>
           </Link>
         ))}
         {/* <Shimmer /> */}

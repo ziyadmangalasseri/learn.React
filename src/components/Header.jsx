@@ -9,30 +9,50 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div className="flex justify-between">
-      <div className="log">
-        <img className="w-[10%]" src={LOGO_URL} />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Online Status : {onlineStatus ? "🟢" : "🔴"}</li>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li>cart</li>
-          <li><Link to="/grocery">Grocery</Link></li>
-          <li>
-            <button
-              onClick={() => {
-                btnNameReact == "login"
-                  ? setBtnNameRecat("logout")
-                  : setBtnNameRecat("login");
-              }}
-            >
-              {btnNameReact}
-            </button>
-          </li>
-        </ul>
+    <div className="p-2">
+      <div className="flex justify-between border border-solid border-black ">
+        <div className="log">
+          <img className="w-[10%]" src={LOGO_URL} />
+        </div>
+        <div className="w-[50%] flex items-center">
+          <ul className="flex p-4 m-4 gap-5">
+            <li>Online Status : {onlineStatus ? "🟢" : "🔴"}</li>
+            <li>
+              <button>
+                <Link to="/">Home</Link>
+              </button>
+            </li>
+            <li>
+              <button>
+                <Link to="/about">About</Link>
+              </button>
+            </li>
+            <li>
+              <button>
+                <Link to="/contact">Contact</Link>
+              </button>
+            </li>
+            <li>
+              <button>cart</button>
+            </li>
+            <li>
+              <button>
+                <Link to="/grocery">Grocery</Link>
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  btnNameReact == "login"
+                    ? setBtnNameRecat("logout")
+                    : setBtnNameRecat("login");
+                }}
+              >
+                {btnNameReact}
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
