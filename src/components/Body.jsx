@@ -3,7 +3,7 @@ import RestaurantCard, {
 } from "../components/RestaurantCard";
 import resList from "../utils/swiggyData";
 import { useState, useEffect } from "react";
-import Shimmer from "./shimmer";
+import ShimmerCard from "./ShimmerCard";
 import { Link } from "react-router-dom";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 
@@ -41,8 +41,9 @@ const Body = () => {
   }
 
   // Conditional Rendering
-  return !ListOfRestaurants || ListOfRestaurants.length == 0 ? (
-    <Shimmer />
+  return ListOfRestaurants.length == 0 ? (
+    <ShimmerCard />
+    // <h1>shmmer</h1>
   ) : (
     <div className="body flex-row justify-center px-[100px]">
       <div className="body-head flex p-4">
