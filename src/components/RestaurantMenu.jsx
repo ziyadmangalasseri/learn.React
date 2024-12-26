@@ -8,7 +8,7 @@ export const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
   console.log("res info", resInfo);
-  const [showIndex, setShowIndex] = useState(0);
+  const [showIndex, setShowIndex] = useState(null);
 
   if (!resInfo) {
     return <Shimmer />;
@@ -46,6 +46,7 @@ export const RestaurantMenu = () => {
             data={category?.card?.card}
             showItems={index == showIndex ? true : false}
             setShowIndex={() => setShowIndex(index)}
+            setHideIndex = { () => setShowIndex (null)}
           />
         ))}
       </div>

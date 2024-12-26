@@ -1,25 +1,26 @@
 import { IMG_URL } from "../utils/contants";
+import UserContext from "../utils/UserContext";
+import { useContext } from "react";
 const RestaurantCard = (props) => {
   const { resData } = props;
   const { name, cloudinaryImageId, cuisines, avgRating } = resData?.info;
+  const {loggedInUser} = useContext(UserContext);
 
   return (
-    <div>
-      <div className="res-card p-3 w-[300px] h-[400px] rounded-xl bg-gray-300 hover:bg-gray-100">
-        <img
-          className="res-logo rounded-l-full w-full h-[200px] object-cover"
-          alt="res-logo"
-          src={IMG_URL + cloudinaryImageId}
-        />
-        <h3 className="font-bold text-md mt-2">{name}</h3>
-        <h4 className="text-sm break-words whitespace-normal leading-tight mt-1">
-          {cuisines.join(", ")}
-        </h4>
-        <h4 className="text-sm mt-2 font-medium">⭐ {avgRating}</h4>
-        <h4 className="text-sm text-gray-500">
-          {resData?.info?.sla?.slaString}
-        </h4>
-      </div>
+    
+    <div className="res-card p-3 w-[300px] h-[350px] rounded-xl hover:bg-gray-100">
+      <img
+        className="res-logo rounded-2xl w-full h-[200px] object-cover"
+        alt="res-logo"
+        src={IMG_URL + cloudinaryImageId}
+      />
+      <h3 className="font-bold text-md mt-2">{name}</h3>
+      <h4 className="text-sm break-words whitespace-normal leading-tight mt-1">
+        {cuisines.join(", ")}
+      </h4>
+      <h4 className="text-sm mt-2 font-medium">⭐ {avgRating}</h4>
+      <h4 className="text-sm text-gray-500">{resData?.info?.sla?.slaString}</h4>
+      <h3>User : {loggedInUser}</h3>
     </div>
   );
 };
