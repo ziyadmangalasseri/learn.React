@@ -17,6 +17,7 @@ const Cart = () => {
       >
         Clear Cart
       </button>
+      {cartItems.length == 0 && <h3>Cart is empty please add cart!</h3>}
       <div className="w-6/12 m-auto">
         <ItemList items={cartItems} />
       </div>
